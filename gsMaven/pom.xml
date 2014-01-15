@@ -1,0 +1,81 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<!-- POM model version (always 4.0.0). -->
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- Group or organization that the project belongs to. Often expressed as an inverted domain name. -->
+	<groupId>org.springframework.gs</groupId>
+	
+	<!-- Name to be given to the project’s library artifact (for example, the name of its JAR or WAR file). -->
+	<artifactId>gsMaven</artifactId>
+	
+	<!-- Version of the project that's being built -->
+	<version>0.1.0</version>
+	
+	<!-- How the project should be packaged. Defaults to "jar" for JAR file packaging. Use "war" for WAR file packaging. -->
+	<packaging>jar</packaging>
+	
+	<dependencies>
+    <dependency>
+	
+<!-- 	Our definition of LocalTime() in the HelloWorld class requires the Joda Time dependency
+	This is how a dependency is added to the POM.
+	
+	Within the <dependency> element, the dependency coordinates are defined by three sub-elements:
+	Group ID - The group or organization that the dependency belongs to.
+	Artifact ID - The library that is required.
+	Version - The specific version of the library that is required. -->
+	
+	
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>2.2</version>
+	
+<!-- 	By default, all dependencies are scoped as compile dependencies. 
+	That is, they should be available at compile-time (and if you were 
+	building a WAR file, including in the /WEB-INF/libs folder of the WAR).
+	Additionally, you may specify a <scope> element to specify one of the following scopes:
+	
+	Provided - Dependencies that are required for compiling the project code, but that will
+	be provided at runtime by a container running the code (e.g., the Java Servlet API).
+	
+	test - Dependencies that are used for compiling and running tests, but not required 
+	for building or running the project’s runtime code. -->
+
+    </dependency>
+</dependencies>
+
+<!-- The completed pom.xml file is using the Maven Shade Plugin 
+for the simple convenience of making the JAR file executable. 
+The focus of this guide is getting started with Maven, not 
+using this particular plugin.  -->
+
+ <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>hello.HelloWorld</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+	
+</project>
